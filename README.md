@@ -77,7 +77,7 @@ This dataset has following advantages
 - We obtained Accuracy 0.8800 for the train data and Accuracy 0.8171 for the validation data.
   
  <p align="center">
-  <img src="https://github.com/lilosa88/Sarcasm-detection/blob/main/Images/Screenshot%20from%202021-05-31%2016-10-14.png" width="720" height="480">
+  <img src="https://github.com/lilosa88/Sarcasm-detection/blob/main/Images/Screenshot%20from%202021-05-31%2016-10-14.png" width="420" height="480">
  </p> 
 
 

@@ -38,13 +38,13 @@ This dataset has following advantages
 # Preprocessing
 
 - We carried out the pre-processing with the following hyperparameters:
-  -- vocab_size = 1000 
-  -- embedding_dim = 32 
-  -- max_length = 16 # and this(it was 32)
-  -- trunc_type='post'
-  -- padding_type='post'
-  -- oov_tok = "<OOV>"
-  -- training_size = 20000
+  - vocab_size = 1000 
+  - embedding_dim = 32 
+  - max_length = 16 # and this(it was 32)
+  - trunc_type='post'
+  - padding_type='post'
+  - oov_tok = "<OOV>"
+  - training_size = 20000
 
 - We clean the data by removing punctuations, stopwords and applying lowercase. Thus we use PorterStemmer, stemming is the process of reducing words to their word stem.
 - We convert our sentences into vectors using Bag of words model.

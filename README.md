@@ -37,6 +37,8 @@ This dataset has following advantages
 
 # Preprocessing
 
+- Test and train split: This dataset has about 27,000 records. So, we train on 20,000 and validate on the rest. 
+
 - We carried out the pre-processing with the following hyperparameters:
   - vocab_size = 1000 
   - embedding_dim = 32 
@@ -45,6 +47,20 @@ This dataset has following advantages
   - padding_type='post'
   - oov_tok = "<OOV>"
   - training_size = 20000
+  
+ - First, we apply tokenizer which is an encoder ofer by Tensorflow and keras. This works by generating a dictionary of word encodings and creating vectors out of the sentences. The hyper-parameter vocab_size is given as the number of words. So by setting this hyperparameter, what the tokenizer will do is take the top number of words given in vocab_size and just encode those. On the other hand, in many cases, it's a good idea to instead of just ignoring unseen words, to put a special value when an unseen word is encountered. You can do this with a property on the tokenizer. This property is oov token and is set in the tokenizer constructor. I've specified that I want the token OOV for outer vocabulary to be used for words that aren't in the word index.
+  
+ - Second, we apply the fit_on_texts method of the tokenizer that actually encodes the data following the hyper-parameter given previosuly. 
+  
+ - Third, we apply the word_index method. The tokenizer provides a word index property which returns a dictionary containing key value pairs, where the key is the word, and the value is the token for that word. An important thing to highlight is that tokenizer method strips punctuation out and convert all in lowercase.
+  
+ - Fourth, we turn the sentences into lists of values based on these tokens.To do so, we apply the method texts_to_sequences.
+  
+ - Fifth, we manipulate these lists to make every sentence the same length, otherwise, it may be hard to train a neural network with them. To do so, we apply the method pad_sequences that use padding. Basically this method what it does is to add zeros on the left or rigth 
+  
+ 
+  
+  
 
 - We clean the data by removing punctuations, stopwords and applying lowercase. Thus we use PorterStemmer, stemming is the process of reducing words to their word stem.
 - We convert our sentences into vectors using Bag of words model.

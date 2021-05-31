@@ -78,7 +78,7 @@ This dataset has following advantages
   
  <p align="center">
   <img src="https://github.com/lilosa88/Sarcasm-detection/blob/main/Images/Screenshot%20from%202021-05-31%2016-10-14.png" width="320" height="460">
- </p> 
+ </p>  
 
 
 

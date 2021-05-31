@@ -39,39 +39,47 @@ This dataset has following advantages
 
 - Test and train split: This dataset has about 27,000 records. So, we train on 20,000 and validate on the rest. 
 
-- We carried out the pre-processing with the following hyperparameters:
-  - vocab_size = 1000 
-  - embedding_dim = 32 
-  - max_length = 16 # and this(it was 32)
-  - trunc_type='post'
-  - padding_type='post'
-  - oov_tok = "<OOV>"
-  - training_size = 20000
-  
- - First, we apply tokenizer which is an encoder ofer by Tensorflow and keras. This works by generating a dictionary of word encodings and creating vectors out of the sentences. The hyper-parameter vocab_size is given as the number of words. So by setting this hyperparameter, what the tokenizer will do is take the top number of words given in vocab_size and just encode those. On the other hand, in many cases, it's a good idea to instead of just ignoring unseen words, to put a special value when an unseen word is encountered. You can do this with a property on the tokenizer. This property is oov token and is set in the tokenizer constructor. I've specified that I want the token OOV for outer vocabulary to be used for words that aren't in the word index.
-  
- - Second, we apply the fit_on_texts method of the tokenizer that actually encodes the data following the hyper-parameter given previosuly. 
-  
- - Third, we apply the word_index method. The tokenizer provides a word index property which returns a dictionary containing key value pairs, where the key is the word, and the value is the token for that word. An important thing to highlight is that tokenizer method strips punctuation out and convert all in lowercase.
-  
- - Fourth, we turn the sentences into lists of values based on these tokens.To do so, we apply the method texts_to_sequences.
-  
- - Fifth, we manipulate these lists to make every sentence the same length, otherwise, it may be hard to train a neural network with them. To do so, we apply the method pad_sequences that use padding. Basically this method what it does is to add zeros on the left or rigth 
-  
- 
-  
-  
+-For both train and test data we apply the following steps:
 
-- We clean the data by removing punctuations, stopwords and applying lowercase. Thus we use PorterStemmer, stemming is the process of reducing words to their word stem.
-- We convert our sentences into vectors using Bag of words model.
-- We applying encoding into the column label.
-- Train and test split. 
+  - We carried out the pre-processing with the following hyperparameters:
+    - vocab_size = 1000 
+    - embedding_dim = 32 
+    - max_length = 16 # and this(it was 32)
+    - trunc_type='post'
+    - padding_type='post'
+    - oov_tok = "<OOV>"
+    - training_size = 20000
+  
+  - First, we apply tokenizer which is an encoder ofer by Tensorflow and keras. This works by generating a dictionary of word encodings and creating vectors out    of the sentences. The hyper-parameter vocab_size is given as the number of words. So by setting this hyperparameter, what the tokenizer will do is take the      top number of words given in vocab_size and just encode those. On the other hand, in many cases, it's a good idea to instead of just ignoring unseen words, to    put a special value when an unseen word is encountered. You can do this with a property on the tokenizer. This property is oov token and is set in the            tokenizer constructor. I've specified that I want the token OOV for outer vocabulary to be used for words that aren't in the word index.
+  
+  - Second, we apply the fit_on_texts method of the tokenizer that actually encodes the data following the hyper-parameter given previosuly. 
+  
+  - Third, we apply the word_index method. The tokenizer provides a word index property which returns a dictionary containing key value pairs, where the key is     the word, and the value is the token for that word. An important thing to highlight is that tokenizer method strips punctuation out and convert all in           lowercase.
+  
+  - Fourth, we turn the sentences into lists of values based on these tokens.To do so, we apply the method texts_to_sequences.
+  
+  - Fifth, we manipulate these lists to make every sentence the same length, otherwise, it may be hard to train a neural network with them. To do so, we apply      the method pad_sequences that use padding. First, in order to use the padding functions you'll have to import pad sequences from                                  tensorflow.carastoppreprocessing.sequence. Then once the tokenizer has created the sequences, these sequences can be passed to pad sequences in order to have    them padded. The list of sentences then is padded out into a matrix where each row in the matrix has the same length. This is achieved by putting the            appropriate number of zeros before the sentence. If we prefer the zeros being on the right side then we set the parameter padding equals post. Normally, the      matrix width has the same size as the longest sentence. However, this can be override that with the maxlen parameter. 
+  
+  - We convert the two train and test sets into arrays
+ 
+ 
+# Neural Network
+  
+  - This model was created using tf.keras.models.Sequential, which defines a SEQUENCE of layers in the neural network. These sequence of layers used were the following:
+  - One Embedding layer
+  - One GlobalAveragePooling1D layer
+  - Two Dense layers: This adds a layer of neurons. Each layer of neurons has an activation function to tell them what to do. Therefore, the first Dense layer           consisted in 24 neurons with relu as an activation function. The second, have 1 neuron and sigmoid as activation function. 
 
-# Machine Learning Models
+- We built this model using adam optimizer and binary_crossentropy as loss function, as we're classifying to different classes.
 
-- Naive Bayes Model
- 
- Train Random Forest's Accuracy:  0.9887
- 
- Test Random Forest's Accuracy:  0.9838
- 
+- The number of epochs=30
+
+- We obtained Accuracy 0.8800 for the train data and Accuracy 0.8171 for the validation data.
+  
+ <p align="center">
+  <img src="https://github.com/lilosa88/Horse-or-Human/blob/main/Images/Captura%20de%20Pantalla%202021-05-18%20a%20la(s)%2017.17.26.png" width="720" height="480">
+ </p> 
+
+
+
+
